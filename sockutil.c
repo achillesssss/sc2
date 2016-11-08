@@ -3,7 +3,7 @@
  ***********************************/
 
 /**
- * @file	socketutil.h
+ * @file	socketutil.c
  * @author	Khoi Hoang
  */
 
