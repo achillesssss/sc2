@@ -18,7 +18,7 @@ tcp_sock_connect(socket_file_descriptor, hostname, port_number);
 ## Example
 This is a very simple example where a server will establish a socket and wait for receiving a message from a client (server-client model).
 
-Server
+* Server
 
 ````c
 /**
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
 }
 ```
 
-Client
+* Client
 
 ```c
 /**
