@@ -9,7 +9,7 @@
 
 #include "sockutil.h"
 
-int tcp_sock_init(int portno)
+int tcp_sock_init()
 {
 	/*  
 	 *  sockfd: Socket File Descriptor
@@ -19,6 +19,13 @@ int tcp_sock_init(int portno)
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0)
 		error("Failed to open socket");
+
+	return sockfd;
+}
+
+int tcp_sock_serv(int portno)
+{
+	int sockfd = tcp_sock_init();
 
 	/**
 	 * struct sockaddr_in handles internet address
@@ -55,6 +62,28 @@ int tcp_sock_accept(int serv_sockfd)
 		error("Failed to accept");
 
 	return cli_sockfd;
+}
+
+void tcp_sock_connect(int sockfd, char* hostname, int portno) 
+{
+	/* Resolve hostname  */
+	struct hostent *serv;
+	serv = gethostbyname(hostname);
+	if (serv == NULL)
+		error("Host not found");
+	
+	/* Set up address  */
+	struct sockaddr_in addr;
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(portno);
+
+	memcpy(&addr.sin_addr, serv->h_addr, serv->h_length);
+
+	int connect_result =
+		connect(sockfd, (struct sockaddr *) &addr, sizeof(addr));
+
+	if (connect_result < 0)
+		error("Failed to connect");
 }
 
 void error(char* msg)
