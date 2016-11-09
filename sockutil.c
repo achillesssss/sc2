@@ -47,9 +47,6 @@ int tcp_sock_serv(int portno)
 
 int tcp_sock_accept(int serv_sockfd)
 {
-	/* Starts listening to server socket  */
-	listen(serv_sockfd, 5);
-
 	/* Constructs an address for client  */
 	struct sockaddr_in cli_addr;
 	socklen_t cli_len = sizeof(cli_addr);
