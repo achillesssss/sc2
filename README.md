@@ -11,12 +11,13 @@ C library that simplifies socket programming in C, please feel free to make a pu
 ```
 
 ## Example
-This is a very simple example where a server will establish a socket and wait for receiving a message from a client (telnet).
+This is a very simple example where a server will establish a socket and wait for receiving a message from a client.
+Server
+
 ````
 /**
- * @file    server.c
+ * @file server.c
  */
-#include <string.h>
 #include "sockutil.h"
 
 int main(int argc, char** argv)
@@ -26,42 +27,73 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 
-	int sockfd = tcp_sock_init(atoi(argv[1]));
+	int sockfd = tcp_sock_serv(atoi(argv[1]));
 
-	puts("Now waiting for incoming connection");
+	puts("Server is listening");
+
 	int cli_sockfd = tcp_sock_accept(sockfd);
 
-	char buffer[256];
-	int byte_read = read(cli_sockfd, buffer, 256);
-	if (byte_read < 0)
-		error("Failed to read");
-	char message[256] = "Tranmission is sent\n";
+	char read_buffer[256];
 
-	int byte_write = write(cli_sockfd, message, strlen(message));
+	memset(read_buffer, '\0', 256);
+	int byte_read = read(cli_sockfd, read_buffer, 256);
+	if (byte_read < 0)
+		error("Failed to read from client");
+
+	int len = strlen(read_buffer);
+	read_buffer[len - 1] = '\0';
+
+	char* conf_msg = "Success!\n";
+	int byte_write = write(cli_sockfd, conf_msg, strlen(conf_msg));
 	if (byte_write < 0)
 		error("Failed to write");
 
-	printf("Received: %s\n", buffer);
+	printf("Received: %s\n", read_buffer);
 
 	close(cli_sockfd);
 	close(sockfd);
 }
-````
-Output
-```
-ttys001
-$ ./server 8888
-Now waiting for incoming tramission
 ```
 
-```
-ttys002
-telnet localhost 8888
-> Hello sockutil!
-Tranmission is sent
-```
+Client
 
 ```
-ttys001
-Received: Hello sockutil!
+/**
+ * @file server.c
+ */
+#include "sockutil.h"
+
+int main(int argc, char** argv)
+{
+	if (argc < 2) {
+		puts("Missing port number");
+		exit(1);
+	}
+
+	int sockfd = tcp_sock_serv(atoi(argv[1]));
+
+	puts("Server is listening");
+
+	int cli_sockfd = tcp_sock_accept(sockfd);
+
+	char read_buffer[256];
+
+	memset(read_buffer, '\0', 256);
+	int byte_read = read(cli_sockfd, read_buffer, 256);
+	if (byte_read < 0)
+		error("Failed to read from client");
+
+	int len = strlen(read_buffer);
+	read_buffer[len - 1] = '\0';
+
+	char* conf_msg = "Success!\n";
+	int byte_write = write(cli_sockfd, conf_msg, strlen(conf_msg));
+	if (byte_write < 0)
+		error("Failed to write");
+
+	printf("Received: %s\n", read_buffer);
+
+	close(cli_sockfd);
+	close(sockfd);
+}
 ```
