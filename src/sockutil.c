@@ -9,6 +9,8 @@
 
 #include "sockutil.h"
 
+const int DEFAULT_SCK_QUEUE_LEN = 5;
+
 int tcp_sock_init()
 {
 	/*  
@@ -38,9 +40,11 @@ int tcp_sock_serv(int portno)
 	/* Attemps to bind the socket  */
 	int bind_result = 
 		bind(sockfd, (struct sockaddr *) &addr, sizeof(addr));
-	
+
 	if (bind_result < 0)
 		error("Failed to bind");
+
+	listen(sockfd, DEFAULT_SCK_QUEUE_LEN);
 
 	return sockfd;
 }
