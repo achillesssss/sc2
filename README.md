@@ -11,12 +11,12 @@ int sockfd = tcp_sock_serv(port_number);
 int cli_sockfd = tcp_sock_accept(socket_file_descripor);
 	
 /* Connect to a server */
-tcp_connect(socket_file_descriptor, hostname, port_number);
+tcp_sock_connect(socket_file_descriptor, hostname, port_number);
 
 ```
 
 ## Example
-This is a very simple example where a server will establish a socket and wait for receiving a message from a client.
+This is a very simple example where a server will establish a socket and wait for receiving a message from a client (server-client model).
 
 Server
 
