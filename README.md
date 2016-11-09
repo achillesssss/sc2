@@ -12,9 +12,10 @@ C library that simplifies socket programming in C, please feel free to make a pu
 
 ## Example
 This is a very simple example where a server will establish a socket and wait for receiving a message from a client.
+
 Server
 
-````
+````c
 /**
  * @file server.c
  */
@@ -57,7 +58,7 @@ int main(int argc, char** argv)
 
 Client
 
-```
+```c
 /**
  * @file server.c
  */
