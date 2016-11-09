@@ -2,12 +2,17 @@
 C library that simplifies socket programming in C, please feel free to make a pull request!
 
 ## Usage
-```
-/* Open a socket and bind it with a port number in a single line */
-	int sockfd = tcp_sock_init(atoi(argv[1]));
 
-    /* Listen and accept incoming connection in a single line */
-	int cli_sockfd = tcp_sock_accept(sockfd);
+```c
+/* Open a socket for server */
+int sockfd = tcp_sock_serv(port_number);
+
+/* Listen and accept incoming connection */
+int cli_sockfd = tcp_sock_accept(socket_file_descripor);
+	
+/* Connect to a server */
+tcp_connect(socket_file_descriptor, hostname, port_number);
+
 ```
 
 ## Example
