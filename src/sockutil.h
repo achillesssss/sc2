@@ -18,6 +18,8 @@
 #include <netdb.h>
 #include <string.h>
 
+extern const int DEFAULT_SCK_QUEUE_LEN;
+
 /**
  * @brief	Creates an unbound socket
  */
