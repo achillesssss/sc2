@@ -1,3 +1,7 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "include/sockutil.h"
 
 int main(int argc, char** argv)

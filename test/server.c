@@ -1,4 +1,8 @@
 #include <math.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "include/sockutil.h"
 
 void handle_connection(int cli_sockfd);

@@ -7,6 +7,10 @@
  * @author	Khoi Hoang
  */
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "sockutil.h"
 
 const int DEFAULT_SCK_QUEUE_LEN = 5;
