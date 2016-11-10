@@ -34,21 +34,21 @@ int tcp_sock_init();
 int tcp_sock_serv(int portno);
 
 /**
- * @brief	Establishes a client socket that connect to server.
- * @param	An integer which is the file descriptor of server's socket.
- * @return	An integer which is the file descriptor of client's socket.
+ * @brief	Establishes a client's socket that connect to server.
+ * @param	int port number	
+ * @return	int socket's file descriptor	
  */
 int tcp_sock_accept(int serv_sockfd);
 
 /**
- * @brief	Connect the socket to server
+ * @brief	Connects the socket to server.
  * @param	int socket file descriptor (sockfd)	
  * @param	string hostname
- * @prortno	int port number
+ * @return	int port number
  */
 void tcp_sock_connect(int sockfd, char* hostname, int portno);
 /**
- * @brief	Puts an error message and terminate the process
+ * @brief	Puts an error message and terminate the process.
  * @param	string message
  */
 void error(char* msg);
