@@ -42,13 +42,11 @@ int tcp_sock_serv(int portno)
 	addr.sin_addr.s_addr = INADDR_ANY;
 
 	/* Attemps to bind the socket  */
-	int bind_result = 
-		bind(sockfd, (struct sockaddr *) &addr, sizeof(addr));
-
-	if (bind_result < 0)
+	if (bind(sockfd, (struct sockaddr *) &addr, sizeof(addr)) < 0)
 		error("Failed to bind");
 
-	listen(sockfd, DEFAULT_SCK_QUEUE_LEN);
+	if (listen(sockfd, DEFAULT_SCK_QUEUE_LEN) < 0)
+		error("Failed to listen");
 
 	return sockfd;
 }
@@ -84,10 +82,7 @@ void tcp_sock_connect(int sockfd, char* hostname, int portno)
 
 	memcpy(&addr.sin_addr, serv->h_addr, serv->h_length);
 
-	int connect_result =
-		connect(sockfd, (struct sockaddr *) &addr, sizeof(addr));
-
-	if (connect_result < 0)
+	if (connect(sockfd, (struct sockaddr *) &addr, sizeof(addr)) < 0)
 		error("Failed to connect");
 }
 
