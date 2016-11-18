@@ -1,6 +1,8 @@
 #ifndef TRANSFUTIL_H
 #define TRANSFUTIL_H
 
+#include "sockutil.h"
+
 /**
  * @brief	Send a quick message to server
  * @param	int sockfd socket's file descriptor
@@ -11,9 +13,9 @@ void send_msg(int sockfd, char* msg);
 /**
  * @brief	Get quick message
  * @param	int socket's file descriptor
- * @return	string the message
+ * @param	returned string message 
  */
-char* rec_msg(int sockfd);
+void rec_msg(int sockfd,char *buffer)
 
 /**
  * @brief	Send binary data.

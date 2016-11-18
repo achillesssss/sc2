@@ -21,7 +21,9 @@ test:
 	mkdir -p bin/test 
 	$(CC) -c test/server.c -o build/test/server.o
 	$(CC) -c test/client.c -o build/test/client.o
+	
 	$(CC) -o bin/test/server build/test/server.o build/sockutil.a
+	$(CC) -o bin/test/client build/test/client.o build/sockutil.a
 	$(CC) -o bin/test/client build/test/client.o build/sockutil.a
 
 clean:
